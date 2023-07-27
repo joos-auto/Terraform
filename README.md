@@ -88,6 +88,32 @@ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 sudo apt install terraform
 ```
+Яндекс
+```
+https://github.com/netology-code/devops-materials
+https://hashicorp-releases.yandexcloud.net/terraform/
+https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart#configure-terraform
+
+wget https://hashicorp-releases.yandexcloud.net/terraform/1.5.4/terraform_1.5.4_linux_amd64.zip
+zcat terraform_1.5.4_linux_amd64.zip > terraform
+chmod -x terraform / chmod 766 terraform
+./terraform -v
+cp terraform /usr/local/bin/
+cd ~
+nano .terraformrc
+---
+provider_installation {
+  network_mirror {
+    url = "https://terraform-mirror.yandexcloud.net/"
+    include = ["registry.terraform.io/*/*"]
+  }
+  direct {
+    exclude = ["registry.terraform.io/*/*"]
+  }
+}
+---
+terraform init
+```
 
 **Terraform настройка**
 
@@ -108,6 +134,8 @@ url = "название сайта с api "
 terraform init
 ```
 Запускать надо там, где находится файл xxx.tf Пример кода доступен в репозитории GitHub.
+
+https://github.com/wallarm/terraform-example/tree/master/terraform
 
 **Синтаксис Terraform**
 - Однострочные комментарии начинаются с #
